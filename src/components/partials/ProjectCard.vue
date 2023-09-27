@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <div class="card h-100">
+    <div class="card">
         <img :src="'http://127.0.0.1:8000/storage/' + proj.img_src" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ proj.title }}</h5>
@@ -21,4 +21,8 @@ export default {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.card {
+    height: 650px;
+}
+</style>

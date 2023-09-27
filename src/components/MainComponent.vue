@@ -1,7 +1,11 @@
 <script>
 import axios from 'axios';
+import ProjectCard from './partials/ProjectCard.vue';
 
 export default {
+    components: {
+        ProjectCard
+    },
     data() {
         return {
             projects: []
@@ -25,16 +29,18 @@ export default {
 
 <template>
     <main>
-        <div v-for="project in projects">
-            {{ project.title }}
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-3" v-for="project in projects">
+                    <ProjectCard :proj="project" />
+                </div>
+            </div>
         </div>
     </main>
 </template>
 
 <style scoped>
 main {
-    width: 90%;
-    margin: 0 auto;
     padding: 30px 0;
     min-height: calc(100vh - 140px);
 }

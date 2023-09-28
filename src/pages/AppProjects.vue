@@ -68,18 +68,18 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <div class="row g-3">
-            <div class="col-4" v-for="project in projects">
+    <div class="row g-3">
+        <div class="col-4" v-for="project in projects">
+            <router-link :to="{ name: 'blog-project', params: { slug: project.slug } }" class="nav-link h-100">
                 <ProjectCard :proj="project" />
-            </div>
+            </router-link>
         </div>
-        <div class="d-flex justify-content-center align-items-center mt-5">
-            <div>
-                <button @click="changePage('-')" class="btn btn-primary">Prev</button>
-                <span class="mx-4">{{ currentPage }}</span>
-                <button @click="changePage('+')" class="btn btn-primary">Next</button>
-            </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div>
+            <button @click="changePage('-')" class="btn btn-primary">Prev</button>
+            <span class="mx-4">{{ currentPage }}</span>
+            <button @click="changePage('+')" class="btn btn-primary">Next</button>
         </div>
     </div>
 </template>

@@ -7,7 +7,7 @@ export default {
 <template>
     <header class="d-flex justify-content-between align-items-center px-5">
         <div>
-            Boolfolio
+            <router-link :to="{ name: 'home' }" class="nav-link">Boolfolio</router-link>
         </div>
         <nav>
             <ul>

@@ -71,7 +71,7 @@ export default {
     <main>
         <div class="container">
             <div class="row g-3">
-                <div class="col-6" v-for="project in projects">
+                <div class="col-4" v-for="project in projects">
                     <ProjectCard :proj="project" />
                 </div>
             </div>

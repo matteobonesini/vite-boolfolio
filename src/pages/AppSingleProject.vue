@@ -13,16 +13,15 @@ export default {
             this.loading = true;
             axios
                 .get(`http://localhost:8000/api/projects/${this.$route.params.slug}`)
-                .then(res => {
-                    console.log(res);
-                    this.project = res.data.results;
+                .then(response => {
+                    this.project = response.data.results;
                     this.loading = false;
                 })
-                .catch(err => {
-                    console.log(err);
-                    if (err.response.status == 404) {
+                .catch(error => {
+                    if (error.response.status == 404) {
                         this.$router.push({ name: 'not-found' });
                     }
+                    this.loading = false;
                 });
         }
     }
@@ -44,7 +43,7 @@ export default {
                     <li class="list-group-item">Description: {{ project.description }}</li>
                     <li class="list-group-item">Type: {{ project.type.title }}</li>
                     <li class="list-group-item">Technology:
-                        <span v-for="technology in project.technologies" class="mx-1">
+                        <span v-for="technology in project.technologies" class="mx-1 badge text-bg-info">
                             {{ technology.title }}
                         </span>
                     </li>

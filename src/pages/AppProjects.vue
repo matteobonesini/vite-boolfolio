@@ -10,41 +10,35 @@ export default {
         return {
             projects: [],
             currentPage: 1,
-            lastPage: 1
+            lastPage: 1,
+            loading: false
         }
     },
     created() {
-        axios
-            .get('http://127.0.0.1:8000/api/projects', {
-                params: {
-                    page: this.currentPage
-                }
-            })
-            .then(response => {
-                // handle success
-                console.log(response.data.result);
-                this.projects = response.data.result.data;
-                this.lastPage = response.data.result.last_page;
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+        this.getProject();
     },
     methods: {
         getProject() {
-            axios
-                .get('http://127.0.0.1:8000/api/projects', {
-                    params: {
-                        page: this.currentPage
-                    }
-                })
-                .then(response => {
-                    this.projects = response.data.result.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
+            if (!this.loading) {
+                this.loading = true;
+                axios
+                    .get('http://127.0.0.1:8000/api/projects', {
+                        params: {
+                            page: this.currentPage
+                        }
+                    })
+                    .then(response => {
+                        this.projects = response.data.result.data;
+                        this.lastPage = response.data.result.last_page;
+                        this.loading = false;
+                    })
+                    .catch((error) => {
+                        if (error.response.status == 404) {
+                            this.$router.push({ name: 'not-found' });
+                        }
+                        this.loading = false;
+                    })
+            }
         },
         changePage(mode) {
             switch (mode) {
@@ -77,9 +71,10 @@ export default {
     </div>
     <div class="d-flex justify-content-center align-items-center mt-5">
         <div>
-            <button @click="changePage('-')" class="btn btn-primary">Prev</button>
+            <button @click="changePage('-')" :disabled="currentPage <= 1 || loading" class="btn btn-primary">Prev</button>
             <span class="mx-4">{{ currentPage }}</span>
-            <button @click="changePage('+')" class="btn btn-primary">Next</button>
+            <button :disabled="currentPage >= lastPage || loading" @click="changePage('+')"
+                class="btn btn-primary">Next</button>
         </div>
     </div>
 </template>

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AppHome from './pages/AppHome.vue';
 import AppProjects from './pages/AppProjects.vue';
 import AppSingleProject from './pages/AppSingleProject.vue';
+import AppContact from './pages/AppContact.vue';
 import AppNotFound from './pages/AppNotFound.vue';
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
             path: '/blog/:slug',
             name: 'blog-project',
             component: AppSingleProject
+        },
+        {
+            path: '/contact',
+            name: 'contact',
+            component: AppContact
         },
         {
             path: '/:pathMatch(.*)*',

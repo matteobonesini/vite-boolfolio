@@ -14,8 +14,11 @@ export default {
                 <li class="me-3">
                     <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
                 </li>
-                <li>
+                <li class="me-3">
                     <router-link :to="{ name: 'blog' }" class="nav-link">Blog</router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'contact' }" class="nav-link">Contact</router-link>
                 </li>
             </ul>
         </nav>
